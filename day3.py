@@ -1,4 +1,4 @@
-f = open("day3.txt", "r")
+f = open("inputs/day3.txt", "r")
 grid = []
 
 for x in f:
