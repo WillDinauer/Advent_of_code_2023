@@ -1,5 +1,6 @@
-
 def dot(i, x, c, vals, springs, hash_dp, dot_dp):
+    if tuple((i, x, c)) in dot_dp:
+        return dot_dp[i, x, c]
     val = 0
     if c > 0:
         if c == vals[x]:
@@ -10,6 +11,8 @@ def dot(i, x, c, vals, springs, hash_dp, dot_dp):
     return val
 
 def hash(i, x, c, vals, springs, hash_dp, dot_dp):
+    if tuple((i, x, c)) in hash_dp:
+        return hash_dp[i, x, c]
     val = 0
     c += 1
     if x < len(vals):
@@ -23,12 +26,12 @@ def recur(i, x, c, vals, springs, hash_dp, dot_dp):
         return 1 if x == len(vals) or (x == len(vals)-1 and vals[x] == c) else 0
     
     if springs[i] == ".":
-        return dot_dp[i, x, c] if tuple((i, x, c)) in dot_dp else dot(i, x, c, vals, springs, hash_dp, dot_dp)
+        return dot(i, x, c, vals, springs, hash_dp, dot_dp)
     elif springs[i] == "#":
-        return hash_dp[i, x, c] if tuple((i, x, c)) in hash_dp else hash(i, x, c, vals, springs, hash_dp, dot_dp)
+        return hash(i, x, c, vals, springs, hash_dp, dot_dp)
     else:
-        d = dot_dp[i, x, c] if tuple((i, x, c)) in dot_dp else dot(i, x, c, vals, springs, hash_dp, dot_dp)
-        h = hash_dp[i, x, c] if tuple((i, x, c)) in hash_dp else hash(i, x, c, vals, springs, hash_dp, dot_dp)
+        d = dot(i, x, c, vals, springs, hash_dp, dot_dp)
+        h = hash(i, x, c, vals, springs, hash_dp, dot_dp)
         return d + h
 
 def part1():
