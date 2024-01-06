@@ -107,7 +107,6 @@ def part2():
         pq.add([0, 0, 0, "d", 0, 0])
         while not pq.empty():
             val, r, c, dir, ct, cs = pq.get()
-            # print(f"cs: {cs} r: {r} c: {c}")
             if r == len(grid)-1 and c == len(grid[0])-1:
                 return cs
             new_loc = new_directions(r, c, dir, ct)
